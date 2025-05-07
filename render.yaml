@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: dummycrm-backend
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "python3 -m backend.app"
+    envVars:
+      - key: SECRET_KEY
+        value: "QtSMMLk^&#zXDjAHxGaqpFfpzJ6mSU8pztA15213Ta$W"
+    plan: free
+
+  - type: web
+    name: crmify
+    env: node
+    buildCommand: "npm install && npm run build"
+    startCommand: "export NODE_OPTIONS=--openssl-legacy-provider && npm start"
+    rootDir: frontend
+    plan: free
