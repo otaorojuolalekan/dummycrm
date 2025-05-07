@@ -2,7 +2,8 @@ Flask
 Flask-SQLAlchemy
 Flask-Cors
 Flask-Login
-sqlite3
 flask 
 flask-cors 
 sqlalchemy
+python-dotenv
+PyJWT
