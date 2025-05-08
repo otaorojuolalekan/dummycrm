@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig';
 
 const CreateUser = () => {
     const [form, setForm] = useState({
@@ -23,7 +24,7 @@ const CreateUser = () => {
         e.preventDefault();
         setNotification('');
         try {
-            const res = await fetch('http://localhost:5000/auth/register', {
+            const res = await fetch(`${API_BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form)

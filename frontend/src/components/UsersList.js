@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CaseDetails.css'
+import API_BASE_URL from './apiConfig';
 
 
 const UsersList = () => {
@@ -8,7 +9,7 @@ const UsersList = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('http://localhost:5000/auth/get_users');
+            const response = await fetch(`${API_BASE_URL}/auth/get_users`);
             const data = await response.json();
             setUsers(data);
         };

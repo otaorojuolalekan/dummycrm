@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig';
 
 const CATEGORY_OPTIONS = [
     "Technical", "Commercial", "Metering", "Payment", "Enquiries"
@@ -28,7 +29,7 @@ const CreateCaseForm = () => {
 
     // Fetch users for dropdown
     useEffect(() => {
-        fetch('http://localhost:5000/auth/user_list')
+        fetch('${API_BASE_URL}/auth/user_list')
             .then(res => res.json())
             .then(data => setUsers(data))
             .catch(() => setUsers([]));
@@ -42,7 +43,7 @@ const CreateCaseForm = () => {
         setBusinessUnit('');
         setUndertaking('');
         try {
-            const res = await fetch(`http://localhost:5000/accounts/account_details/${accountId}`);
+            const res = await fetch(`${API_BASE_URL}/accounts/account_details/${accountId}`);
             if (res.ok) {
                 const data = await res.json();
                 setBusinessUnit(data.business_unit);
@@ -80,7 +81,7 @@ const CreateCaseForm = () => {
         };
 
         try {
-            const res = await fetch('http://localhost:5000/cases/create_case', {
+            const res = await fetch('${API_BASE_URL}/cases/create_case', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(caseData)

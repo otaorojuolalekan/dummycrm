@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import API_BASE_URL from './apiConfig';
 
 const AccountDetails = () => {
     const { account_id } = useParams();
@@ -8,13 +9,13 @@ const AccountDetails = () => {
 
     useEffect(() => {
         const fetchAccountDetails = async () => {
-            const response = await fetch(`http://localhost:5000/accounts/account_details/${account_id}`);
+            const response = await fetch(`${API_BASE_URL}/accounts/account_details/${account_id}`);
             const data = await response.json();
             setAccount(data);
         };
 
         const fetchAccountCases = async () => {
-            const response = await fetch(`http://localhost:5000/accounts/account_cases/${account_id}`);
+            const response = await fetch(`${API_BASE_URL}/accounts/account_cases/${account_id}`);
             const data = await response.json();
             setCases(data);
         };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CaseDetails.css'
+import API_BASE_URL from './apiConfig';
 
 
 const AccountsList = () => {
@@ -8,7 +9,7 @@ const AccountsList = () => {
 
     useEffect(() => {
         const fetchAccounts = async () => {
-            const response = await fetch('http://localhost:5000/accounts');
+            const response = await fetch(`${API_BASE_URL}/accounts`);
             const data = await response.json();
             setAccounts(data);
         };

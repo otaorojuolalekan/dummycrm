@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CaseDetails.css';
+import API_BASE_URL from './apiConfig';
 
 const CasesList = () => {
     const [cases, setCases] = useState([]);
 
     useEffect(() => {
         const fetchCases = async () => {
-            const response = await fetch('http://localhost:5000/cases/');
+            const response = await fetch(`${API_BASE_URL}/cases/`);
             console.log(response);
             if (!response.ok) {
                 console.error('Failed to fetch cases');

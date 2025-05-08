@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './CaseDetails.css';
+import API_BASE_URL from './apiConfig';
 
 const subcategories = {
     Technical: ["Wire Cut", "Transformer Fault"],
@@ -38,7 +39,7 @@ const CaseDetails = () => {
     const fetchCaseDetails = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5000/cases/case_details/${case_id}`);
+            const response = await fetch(`${API_BASE_URL}/cases/case_details/${case_id}`);
             const data = await response.json();
             setCaseDetails(data.case);
             setUpdates(data.updates);
@@ -54,7 +55,7 @@ const CaseDetails = () => {
     // Add update handler
 const handleAddUpdate = async () => {
     if (!newUpdate.trim()) return;
-    await fetch('http://localhost:5000/updates/', {
+    await fetch(`${API_BASE_URL}/updates/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,7 +70,7 @@ const handleAddUpdate = async () => {
     // Fetch users list for Assigned To dropdown
     const fetchUsersList = async () => {
         try {
-            const response = await fetch('http://localhost:5000/auth/user_list');
+            const response = await fetch(`${API_BASE_URL}/auth/user_list`);
             const data = await response.json();
             setUsersList(data);
         } catch (error) {
@@ -79,7 +80,7 @@ const handleAddUpdate = async () => {
 
     // Save changes for assigned_to and status
     const handleSaveCase = async () => {
-        await fetch(`http://localhost:5000/cases/update_case/${caseDetails.id}`, {
+        await fetch(`${API_BASE_URL}/cases/update_case/${caseDetails.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

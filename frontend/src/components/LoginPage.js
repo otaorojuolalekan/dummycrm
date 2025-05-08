@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginPage.css'; // Assuming you have a CSS file for styling
+import API_BASE_URL from './apiConfig';
 
 const LoginPage = () => {
     const [form, setForm] = useState({ username: '', password: '' });
@@ -13,7 +14,7 @@ const LoginPage = () => {
         e.preventDefault();
         setNotification('');
         try {
-            const res = await fetch('http://localhost:5000/auth/login', {
+            const res = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form)
