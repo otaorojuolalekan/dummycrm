@@ -13,6 +13,7 @@ services:
     name: crmify
     env: node
     buildCommand: "npm install && npm run build"
-    startCommand: "export NODE_OPTIONS=--openssl-legacy-provider && npm start"
+    startCommand: "npx serve -s build"
     rootDir: frontend
     plan: free
+    
