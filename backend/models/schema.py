@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime
+from datetime import datetime
 from sqlalchemy.orm import relationship
 from backend.database import Base
 from backend.database import Base
@@ -58,6 +59,9 @@ class Case(Base):
     description = Column(Text, nullable=False)
     category = Column(String, nullable=False)
     subcategory = Column(String, nullable=False)
+    date_created = Column(DateTime, default=datetime.utcnow, nullable=False)
+    date_modified = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
 
     account = relationship("Account", back_populates="cases")
     created_user = relationship("User", foreign_keys=[created_user_id])
@@ -73,7 +77,9 @@ class Case(Base):
             "status": self.status,
             "description": self.description,
             "category": self.category,
-            "subcategory": self.subcategory
+            "subcategory": self.subcategory,
+            "date_created": self.date_created,
+            "date_modified": self.date_modified
         }
 
 class Update(Base):
@@ -83,6 +89,7 @@ class Update(Base):
     created_user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
     case_id = Column(Integer, ForeignKey('cases.id'), nullable=False)
     update_description = Column(Text, nullable=False)
+    date_created = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     case = relationship("Case", back_populates="updates")
     created_user = relationship("User")
@@ -92,6 +99,7 @@ class Update(Base):
             "id": self.id,
             "created_user_id": self.created_user_id,
             "case_id": self.case_id,
-            "update_description": self.update_description
+            "update_description": self.update_description,
+            "date_created": self.date_created
         }
     

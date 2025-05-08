@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, request, jsonify
 from backend.models.schema import Case, Update, Account, User
 from backend.database import db_session
@@ -99,6 +100,7 @@ def update_case(case_id):
         case.assigned_user_id = data['assigned_user_id']
     if 'status' in data:
         case.status = data['status']
+    case.date_modified = datetime.utcnow()
 
     db_session.commit()
     return jsonify({'message': 'Case updated successfully'}), 200
