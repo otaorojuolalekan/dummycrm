@@ -16,4 +16,6 @@ services:
     startCommand: "npx serve -s build"
     rootDir: frontend
     plan: free
-    
+    envVars:
+      - key: NODE_OPTIONS
+        value: --openssl-legacy-provider
