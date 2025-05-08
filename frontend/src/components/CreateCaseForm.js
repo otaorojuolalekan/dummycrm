@@ -29,7 +29,7 @@ const CreateCaseForm = () => {
 
     // Fetch users for dropdown
     useEffect(() => {
-        fetch('${API_BASE_URL}/auth/user_list')
+        fetch(`${API_BASE_URL}/auth/user_list`)
             .then(res => res.json())
             .then(data => setUsers(data))
             .catch(() => setUsers([]));
@@ -81,7 +81,7 @@ const CreateCaseForm = () => {
         };
 
         try {
-            const res = await fetch('${API_BASE_URL}/cases/create_case', {
+            const res = await fetch(`${API_BASE_URL}/cases/create_case`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(caseData)
