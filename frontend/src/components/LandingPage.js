@@ -9,7 +9,7 @@ const pages = [
     { path: '/create_case', label: 'Create Case' },
     { path: '/create_account', label: 'Create Account' },
     { path: '/users', label: 'View Users' },
-    // Add more routes as needed
+    { path: '/reports', label: 'Reports' }, // <-- Added Reports link
 ];
 
 const LandingPage = () => (

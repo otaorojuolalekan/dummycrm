@@ -10,6 +10,11 @@ import CreateAccount from './components/CreateAccount';
 import CreateUser from './components/CreateUser';
 import LandingPage from './components/LandingPage';
 import UsersList from './components/UsersList';
+import ReportsPage from './components/ReportsPage';
+import AccountsReport from './components/AccountsReport';
+import CasesReport from './components/CasesReport';
+import UsersReport from './components/UsersReport';
+import UpdatesReport from './components/UpdatesReport';
 
 function App() {
   return (
@@ -25,6 +30,11 @@ function App() {
         <Route path="/create_user" component={CreateUser} />
         <Route path="/welcome" component={LandingPage} />
         <Route path="/users" component={UsersList} />
+        <Route path="/reports" component={ReportsPage} />
+        <Route path="/reports/accounts" component={AccountsReport} />
+        <Route path="/reports/cases" component={CasesReport} />
+        <Route path="/reports/users" component={UsersReport} />
+        <Route path="/reports/updates" component={UpdatesReport} />
         {/* Add more routes as needed */}
       </Switch>
     </Router>
