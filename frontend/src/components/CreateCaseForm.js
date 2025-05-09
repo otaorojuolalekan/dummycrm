@@ -4,6 +4,7 @@ import API_BASE_URL from './apiConfig';
 const CATEGORY_OPTIONS = [
     "Technical", "Commercial", "Metering", "Payment", "Enquiries"
 ];
+console.log(API_BASE_URL);
 
 const SUBCATEGORY_OPTIONS = {
     Technical: ["Wire Cut", "Broken Pole", "DT Fault", "Low Voltage"],
@@ -26,6 +27,7 @@ const CreateCaseForm = () => {
     const [accountError, setAccountError] = useState('');
     const [isAccountValid, setIsAccountValid] = useState(false);
     const [notification, setNotification] = useState('');
+    const [caseDates, setCaseDates] = useState({ date_created: '', date_modified: '' });
 
     // Fetch users for dropdown
     useEffect(() => {
@@ -74,7 +76,7 @@ const CreateCaseForm = () => {
             account_id: accountId,
             assigned_user_id: assignedUserId,
             category,
-            created_user_id: 1, // TODO: Replace with logged-in user ID
+            created_user_id: 6, // TODO: Replace with logged-in user ID
             description,
             status,
             subcategory
@@ -89,6 +91,11 @@ const CreateCaseForm = () => {
             const data = await res.json();
             if (res.ok) {
                 setNotification('Case created successfully!');
+                // Save the dates if present in response
+                setCaseDates({
+                    date_created: data.date_created || '',
+                    date_modified: data.date_modified || ''
+                });
                 setTimeout(() => {
                     setNotification('');
                     window.location.href = '/cases';
@@ -204,6 +211,13 @@ const CreateCaseForm = () => {
                         ))}
                     </select>
                 </div>
+                {/* Show date_created and date_modified after assigned user name */}
+                {caseDates.date_created && (
+                    <div className="grid-item" style={{ gridColumn: '1 / -1' }}>
+                        <strong>Date Created:</strong> {new Date(caseDates.date_created).toLocaleString()}<br />
+                        <strong>Date Modified:</strong> {new Date(caseDates.date_modified).toLocaleString()}
+                    </div>
+                )}
                 <div className="grid-item" style={{ gridColumn: '1 / -1' }}>
                     <button type="submit" disabled={!isAccountValid}>Create SR</button>
                 </div>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import './LoginPage.css'; // Assuming you have a CSS file for styling
+import './LoginPage.css';
 import API_BASE_URL from './apiConfig';
+
+console.log(API_BASE_URL);
+
 
 const LoginPage = () => {
     const [form, setForm] = useState({ username: '', password: '' });
